@@ -2,9 +2,7 @@ class DarknetHankai < Formula
   desc "Darknet: neural network framework for object detection (CPU-only build)"
   homepage "https://github.com/hank-ai/darknet"
 
-  url "https://github.com/hank-ai/darknet.git",
-      tag:      "v3.0",
-      revision: "HEAD"
+  url "https://github.com/hank-ai/darknet.git"
   version "3.0"
   license "Apache-2.0"
   head "https://github.com/hank-ai/darknet.git", branch: "master"

@@ -1,9 +1,7 @@
 class Darkhelp < Formula
   desc "DarkHelp: C++ helper class for Darknet's C API"
   homepage "https://github.com/stephanecharette/DarkHelp"
-  url "https://github.com/stephanecharette/DarkHelp.git",
-      tag:      "v1.9.6",
-      revision: "HEAD"
+  url "https://github.com/stephanecharette/DarkHelp.git"
   version "1.9.6"
   license "MIT"
   head "https://github.com/stephanecharette/DarkHelp.git", branch: "master"

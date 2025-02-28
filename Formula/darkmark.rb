@@ -1,9 +1,7 @@
 class Darkmark < Formula
   desc "DarkMark: GUI for Darknet and DarkHelp"
   homepage "https://github.com/stephanecharette/DarkMark"
-  url "https://github.com/jpfleischer/DarkMark.git",
-      tag:      "v1.10.18",
-      revision: "HEAD"
+  url "https://github.com/jpfleischer/DarkMark.git"
   version "1.10.18"
   license "MIT"
   head "https://github.com/jpfleischer/DarkMark.git", branch: "master"
