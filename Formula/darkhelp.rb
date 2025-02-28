@@ -13,15 +13,13 @@ class Darkhelp < Formula
     depends_on "opencv"
   
     def install
-      buildsrc = buildpath/"buildsrc"
-      cp_r ".", buildsrc
-  
-      inreplace buildsrc/"CMakeLists.txt", "/opt/darknet/cfg", "#{etc}/darknet/cfg" if File.read(buildsrc/"CMakeLists.txt").include?("/opt/darknet/cfg")
+      # Create a pkgconfig directory in the prefix if it doesn't exist
+      (prefix/"lib/pkgconfig").mkpath
   
       mkdir "build" do
-        system "cmake", "-S", buildsrc, "-B", ".",
-                        "-DCMAKE_BUILD_TYPE=Release",
-                        "-DCMAKE_INSTALL_PREFIX=#{prefix}"
+        system "cmake", "..",
+               "-DCMAKE_BUILD_TYPE=Release",
+               "-DCMAKE_INSTALL_PREFIX=#{prefix}"
         system "make", "-j#{ENV.make_jobs}"
         system "make", "install"
       end
@@ -31,4 +29,3 @@ class Darkhelp < Formula
       system "false"
     end
   end
-  

@@ -19,15 +19,15 @@ class Darkmark < Formula
     depends_on "poppler"
   
     def install
-      buildsrc = buildpath/"buildsrc"
-      cp_r ".", buildsrc
-  
-      inreplace buildsrc/"CMakeLists.txt", "/opt/darknet/cfg", "#{etc}/darknet/cfg" if File.read(buildsrc/"CMakeLists.txt").include?("/opt/darknet/cfg")
+      # Ensure necessary directories exist
+      (prefix/"bin").mkpath
+      (prefix/"lib").mkpath
+      (prefix/"include").mkpath
   
       mkdir "build" do
-        system "cmake", "-S", buildsrc, "-B", ".",
-                        "-DCMAKE_BUILD_TYPE=Release",
-                        "-DCMAKE_INSTALL_PREFIX=#{prefix}"
+        system "cmake", "..",
+               "-DCMAKE_BUILD_TYPE=Release",
+               "-DCMAKE_INSTALL_PREFIX=#{prefix}"
         system "make", "-j#{ENV.make_jobs}"
         system "make", "install"
       end
@@ -37,4 +37,3 @@ class Darkmark < Formula
       system "false"
     end
   end
-  
