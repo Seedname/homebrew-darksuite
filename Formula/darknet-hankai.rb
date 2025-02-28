@@ -3,7 +3,6 @@ class DarknetHankai < Formula
     homepage "https://github.com/hank-ai/darknet"
     url "https://github.com/hank-ai/darknet.git"
     version "3.0"
-    sha256 :no_check
     license "Apache-2.0"
     head "https://github.com/hank-ai/darknet.git", branch: "master"
   
@@ -12,10 +11,13 @@ class DarknetHankai < Formula
     depends_on "opencv"
   
     def install
-      inreplace "Makefile", "/opt/darknet/cfg", "#{etc}/darknet/cfg"
+      buildsrc = buildpath/"buildsrc"
+      cp_r ".", buildsrc
+  
+      inreplace buildsrc/"CMakeLists.txt", "/opt/darknet/cfg", "#{etc}/darknet/cfg" if File.read(buildsrc/"CMakeLists.txt").include?("/opt/darknet/cfg")
   
       mkdir "build" do
-        system "cmake", "..",
+        system "cmake", "-S", buildsrc, "-B", ".",
                         "-DCMAKE_BUILD_TYPE=Release",
                         "-DCMAKE_INSTALL_PREFIX=#{prefix}",
                         "-DGPU=OFF"  # CPU-only build
